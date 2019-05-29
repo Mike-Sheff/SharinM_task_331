@@ -1,14 +1,10 @@
 package ru.netologia.sharinm_task_331;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
-import android.content.ClipData;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,11 +27,11 @@ public class MainActivity extends AppCompatActivity {
         initView();
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
@@ -45,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         saveInstanceState.putString("displayValue", txtDisplayValue.getText().toString());
         saveInstanceState.putString("displayResult", txtDisplayResult.getText().toString());
         saveInstanceState.putString("displayOperation",txtDisplayOperation.getText().toString());
-
 
         if (linearLayout.getVisibility() == View.VISIBLE){
             saveInstanceState.putBoolean("calculateEngineer", true);
@@ -66,12 +61,12 @@ public class MainActivity extends AppCompatActivity {
 
         if (saveInstanceState.getBoolean("calculateEngineer")){
             linearLayout.setVisibility(View.VISIBLE);
+
         } else {
             linearLayout.setVisibility(View.GONE);
 
         }
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -87,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-        item.setChecked(false);
+        item.setChecked(true);
 
         return super.onOptionsItemSelected(item);
     }
@@ -97,72 +92,34 @@ public class MainActivity extends AppCompatActivity {
         txtDisplayValue = findViewById(R.id.displayValue);
         txtDisplayOperation = findViewById(R.id.displayOperation);
 
-        Button btn0 = findViewById(R.id.button0);
-        Button btn1 = findViewById(R.id.button1);
-        Button btn2 = findViewById(R.id.button2);
-        Button btn3 = findViewById(R.id.button3);
-        Button btn4 = findViewById(R.id.button4);
-        Button btn5 = findViewById(R.id.button5);
-        Button btn6 = findViewById(R.id.button6);
-        Button btn7 = findViewById(R.id.button7);
-        Button btn8 = findViewById(R.id.button8);
-        Button btn9 = findViewById(R.id.button9);
-        Button btnPoint = findViewById(R.id.buttonPoint);
+        NumberButtonClickListener numberListener = new NumberButtonClickListener();
+        int[] buttonIdNumber = new int[] { R.id.button0, R.id.button1, R.id.button2,
+                                     R.id.button3, R.id.button4, R.id.button5,
+                                     R.id.button6, R.id.button7, R.id.button8,
+                                     R.id.button9,R.id.buttonPoint};
 
-        Button btnDel = findViewById(R.id.buttonDelete);
-        Button btnClear = findViewById(R.id.buttonClear);
-        Button btnPercent = findViewById(R.id.buttonPercent);
+        for(int buttonId : buttonIdNumber) {
+            findViewById(buttonId).setOnClickListener(numberListener);
+        }
 
-        Button btnSing = findViewById(R.id.buttonSing);
-        Button btnDivision = findViewById(R.id.buttonDivision);
-        Button btnPlus = findViewById(R.id.buttonPlus);
-        Button btnMinus = findViewById(R.id.buttonMinus);
-        Button btnMultiplication = findViewById(R.id.buttonMultiplication);
-        Button btnEqually = findViewById(R.id.buttonEqually);
+        OperationButtonClickListener numberListenerOperation = new OperationButtonClickListener();
+        int[] buttonIdsOperation = new int[] { R.id.buttonSing, R.id.buttonDivision, R.id.buttonPlus, R.id.buttonMinus, R.id.buttonMultiplication,
+                                                R.id.buttonEqually, R.id.buttonSin, R.id.buttonCos, R.id.buttonLog, R.id.buttonLn,
+                                                R.id.buttonN, R.id.buttonPi, R.id.buttonSquare, R.id.buttonRadix, R.id.buttonDelete,
+                                                R.id.buttonClear, R.id.buttonPercent};
 
-        Button btnSin = findViewById(R.id.buttonSin);
-        Button btnCos = findViewById(R.id.buttonCos);
-        Button btnLog = findViewById(R.id.buttonLog);
-        Button btnLn = findViewById(R.id.buttonLn);
-        Button btnN = findViewById(R.id.buttonN);
-        Button btnPi = findViewById(R.id.buttonPi);
-        Button btnSquare = findViewById(R.id.buttonSquare);
-        Button btnRadix = findViewById(R.id.buttonRadix);
+        for(int buttonId : buttonIdsOperation) {
+            findViewById(buttonId).setOnClickListener(numberListenerOperation);
+        }
+
+        OperationClearButtonClickListener operationClearListener = new OperationClearButtonClickListener();
+        int[] buttonIdsClear = new int[] {  R.id.buttonDelete, R.id.buttonClear};
+
+        for(int buttonId : buttonIdsClear) {
+            findViewById(buttonId).setOnClickListener(operationClearListener);
+        }
 
         linearLayout = findViewById(R.id.linearLayoutEngineer);
-
-        btn0.setOnClickListener(new NumberButtonClickListener());
-        btn1.setOnClickListener(new NumberButtonClickListener());
-        btn2.setOnClickListener(new NumberButtonClickListener());
-        btn3.setOnClickListener(new NumberButtonClickListener());
-        btn4.setOnClickListener(new NumberButtonClickListener());
-        btn5.setOnClickListener(new NumberButtonClickListener());
-        btn6.setOnClickListener(new NumberButtonClickListener());
-        btn7.setOnClickListener(new NumberButtonClickListener());
-        btn8.setOnClickListener(new NumberButtonClickListener());
-        btn9.setOnClickListener(new NumberButtonClickListener());
-        btnPoint.setOnClickListener(new NumberButtonClickListener());
-
-        btnDel.setOnClickListener(new OperationClearButtonClickListener());
-        btnClear.setOnClickListener(new OperationClearButtonClickListener());
-
-        btnSing.setOnClickListener(new OperationButtonClickListener());
-        btnPercent.setOnClickListener(new OperationButtonClickListener());
-        btnDivision.setOnClickListener(new OperationButtonClickListener());
-        btnPlus.setOnClickListener(new OperationButtonClickListener());
-        btnMinus.setOnClickListener(new OperationButtonClickListener());
-        btnMultiplication.setOnClickListener(new OperationButtonClickListener());
-        btnEqually.setOnClickListener(new OperationButtonClickListener());
-
-        btnSin.setOnClickListener(new OperationButtonClickListener());
-        btnCos.setOnClickListener(new OperationButtonClickListener());
-        btnLog.setOnClickListener(new OperationButtonClickListener());
-        btnLn.setOnClickListener(new OperationButtonClickListener());
-        btnN.setOnClickListener(new OperationButtonClickListener());
-        btnPi.setOnClickListener(new OperationButtonClickListener());
-        btnSquare.setOnClickListener(new OperationButtonClickListener());
-        btnRadix.setOnClickListener(new OperationButtonClickListener());
-
     }
 
     class OperationButtonClickListener implements View.OnClickListener {
