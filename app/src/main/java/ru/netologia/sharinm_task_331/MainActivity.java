@@ -1,7 +1,12 @@
 package ru.netologia.sharinm_task_331;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.ShareActionProvider;
+
+import android.app.AlarmManager;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.ActionProvider;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -31,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-
         return true;
     }
 
@@ -61,10 +65,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (saveInstanceState.getBoolean("calculateEngineer")){
             linearLayout.setVisibility(View.VISIBLE);
-
         } else {
             linearLayout.setVisibility(View.GONE);
-
         }
     }
 
